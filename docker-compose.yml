@@ -1,34 +1,18 @@
-version: "3.8"
-
+version: "3.9"
 services:
   db:
-    image: mysql:8.0
-    container_name: glpi_db
-    restart: always
+    image: postgres:15
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: glpidb
-      MYSQL_USER: glpi
-      MYSQL_PASSWORD: glpi
-    volumes:
-      - glpi_data:/var/lib/mysql
-
-  glpi:
-    image: diouxx/glpi
-    container_name: glpi_app
-    restart: always
+      POSTGRES_USER: etl_user
+      POSTGRES_PASSWORD: etl_pass
+      POSTGRES_DB: servicedesk_dw
     ports:
-      - "8080:80"
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=glpi
-      - MYSQL_PASSWORD=glpi
-      - MYSQL_DATABASE=glpidb
-    depends_on:
-      - db
+      - "5432:5432"
     volumes:
-      - glpi_app_data:/var/www/html
-
+      - pgdata:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
 volumes:
-  glpi_data:
-  glpi_app_data:
+  pgdata:
