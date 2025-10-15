@@ -1,5 +1,8 @@
 import pandas as pd
+import sys, os 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from .logger import get_logger
+from .extract import fetch_source_data
 log = get_logger(__name__)
 
 def transform_to_dw_struct(raw: list[dict]) -> dict[str, pd.DataFrame]:
@@ -37,13 +40,11 @@ def transform_to_dw_struct(raw: list[dict]) -> dict[str, pd.DataFrame]:
     })
 
     fact_ticket = df[[
-        "ticket_id","user_id"]].copy()
+        "ticket_id","user_id","status","priority","created_time",
+        "resolved_time","resolution_time_min","is_sla_breached"]].copy()
     fact_ticket["category_id"] = 1
     fact_ticket["sla_id"] = 1
-    fact_ticket = fact_ticket.join(df[["status","priority","created_time",
-                                       "resolved_time","subject","description",
-                                       "response_time_min","resolution_time_min",
-                                       "is_sla_breached"]])
+    fact_ticket = fact_ticket.join(df[["subject","description"]])
 
     log.info(f"dim_user={len(dim_user)}, dim_category={len(dim_category)}, dim_sla={len(dim_sla)}, fact_ticket={len(fact_ticket)}")
     return {
@@ -52,3 +53,12 @@ def transform_to_dw_struct(raw: list[dict]) -> dict[str, pd.DataFrame]:
         "dim_sla": dim_sla,
         "fact_ticket": fact_ticket
     }
+
+if __name__ == "__main__" :
+
+    raw_data = fetch_source_data()
+    dw_struct = transform_to_dw_struct(raw_data)
+
+    for table_name, df in dw_struct.items():
+        print(f"\n===== {table_name} =====")
+        print(df.head())
