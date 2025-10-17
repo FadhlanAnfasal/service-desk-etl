@@ -1,0 +1,22 @@
+bash: cd: too many arguments
+bash: cd: too many arguments
+2025-10-17 15:57:19,256 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-17 15:57:19,993 | INFO | src.extract | Fetched 100 records
+2025-10-17 15:57:20,159 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-17 15:57:21,192 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-17 15:57:21,591 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-17 15:57:21,770 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-17 15:57:22,092 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+Loading .env from: /mnt/c/Users/ACER/Documents/service-desk-etl/.env
+BASE = https://jsonplaceholder.typicode.com
+ENDPOINT = /posts
+2025-10-17 15:59:05,026 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-17 15:59:05,491 | INFO | src.extract | Fetched 100 records
+2025-10-17 15:59:05,579 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-17 15:59:06,261 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-17 15:59:06,475 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-17 15:59:06,717 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-17 15:59:07,288 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+Loading .env from: /mnt/c/Users/ACER/Documents/service-desk-etl/.env
+BASE = https://jsonplaceholder.typicode.com
+ENDPOINT = /posts
