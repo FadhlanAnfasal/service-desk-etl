@@ -3,9 +3,10 @@ from .transform import transform_to_dw_struct
 from .dq import dq_checks
 from .load import upsert_frame
 from .logger import get_logger
+import os
 log = get_logger(__name__)
 
-def run():
+def run(tag=None):
     raw = fetch_source_data()
     tables = transform_to_dw_struct(raw)
     issues = dq_checks(tables)
@@ -18,4 +19,5 @@ def run():
     upsert_frame(tables["fact_ticket"], "fact_ticket", ["ticket_id"])
 
 if __name__ == "__main__":
+    tag = "[AUTO-CRON]" if os.getenv("CRON_RUN") else "MANUAL"
     run()

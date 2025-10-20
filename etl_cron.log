@@ -30,3 +30,13 @@ ENDPOINT = /posts
 Loading .env from: /mnt/c/Users/ACER/Documents/service-desk-etl/.env
 BASE = https://jsonplaceholder.typicode.com
 ENDPOINT = /posts
+2025-10-20 15:00:08,431 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-20 15:00:09,447 | INFO | src.extract | Fetched 100 records
+2025-10-20 15:00:09,508 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-20 15:00:09,859 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-20 15:00:09,959 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-20 15:00:10,063 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-20 15:00:10,212 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+Loading .env from: /mnt/c/Users/ACER/Documents/service-desk-etl/.env
+BASE = https://jsonplaceholder.typicode.com
+ENDPOINT = /posts

@@ -26,9 +26,11 @@ statuses = ["open", "in_progress", "resolved", "closed"]
 priorities = ["low", "medium", "high"]
 
 start_date = datetime.datetime(2025, 1, 1)
+end_date = datetime.datetime(2025, 1, 31)
+delta = (end_date - start_date).days 
 
 for post in posts[:50]:  # ambil 50 data aja biar ga berat
-    created_time = start_date + datetime.timedelta(days=random.randint(0, 30))
+    created_time = start_date + datetime.timedelta(days=random.randint(0, delta))
     resolution_minutes = random.randint(30, 600)
     resolved_time = created_time + datetime.timedelta(minutes=resolution_minutes)
     is_sla_breached = random.choice([True, False])
