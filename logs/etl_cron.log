@@ -1,0 +1,60 @@
+2025-10-21 10:23:24,756 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 10:23:25,864 | INFO | src.extract | Fetched 100 records
+2025-10-21 10:23:25,910 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 10:23:25,917 | WARNING | __main__ | Data Quality issues: ['Invalid priority values found in fact_ticket']
+2025-10-21 10:23:26,077 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 10:23:26,206 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 10:23:26,366 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 10:23:26,558 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 10:30:31,899 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 10:30:32,999 | INFO | src.extract | Fetched 100 records
+2025-10-21 10:30:33,048 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 10:30:33,059 | WARNING | __main__ | Data Quality issues: ['Invalid priority values found in fact_ticket']
+2025-10-21 10:30:33,208 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 10:30:33,323 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 10:30:33,455 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 10:30:33,610 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 10:35:10,056 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 10:35:11,104 | INFO | src.extract | Fetched 100 records
+2025-10-21 10:35:11,156 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 10:35:11,162 | WARNING | __main__ | Data Quality issues: ['Invalid priority values found in fact_ticket']
+2025-10-21 10:35:11,314 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 10:35:11,425 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 10:35:11,543 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 10:35:11,693 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 10:40:30,685 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 10:40:31,970 | INFO | src.extract | Fetched 100 records
+2025-10-21 10:40:32,033 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 10:40:32,048 | WARNING | __main__ | Data Quality issues: ['Invalid priority values found in fact_ticket']
+2025-10-21 10:40:32,208 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 10:40:32,292 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 10:40:32,371 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 10:40:32,484 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 10:47:42,394 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 10:47:43,458 | INFO | src.extract | Fetched 100 records
+2025-10-21 10:47:43,499 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 10:47:43,660 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 10:47:43,772 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 10:47:43,894 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 10:47:44,028 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 11:36:35,031 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-21 11:36:35,171 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 11:36:36,018 | INFO | src.extract | Fetched 100 records
+2025-10-21 11:36:36,020 | INFO | __main__ | Fetched 100 raw records
+2025-10-21 11:36:36,034 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 11:36:36,042 | INFO | __main__ | DQ Checks: None
+2025-10-21 11:36:36,309 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 11:36:36,413 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 11:36:36,507 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 11:36:36,698 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 11:39:50,815 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-21 11:39:50,920 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-21 11:39:51,672 | INFO | src.extract | Fetched 100 records
+2025-10-21 11:39:51,675 | INFO | __main__ | Fetched 100 raw records
+2025-10-21 11:39:51,693 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-21 11:39:51,698 | INFO | __main__ | DQ Checks: None
+2025-10-21 11:39:51,790 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-21 11:39:51,885 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-21 11:39:51,963 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-21 11:39:52,075 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-21 11:39:52,137 | INFO | __main__ | ETL run complete with status=SUCCESS

@@ -13,6 +13,8 @@ def fetch_source_data() -> list[dict]:
     resp.raise_for_status()
     data = resp.json()
     log.info(f"Fetched {len(data)} records")
+    if len(data) < 10:
+        log.warning(f" Data volume too low: only {len(data)} records fetched")
     return data
 
 if __name__ == "__main__":
