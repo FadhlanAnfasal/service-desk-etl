@@ -1,3 +1,4 @@
+import os
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 import pandas as pd
@@ -36,3 +37,18 @@ def upsert_frame(df: pd.DataFrame, table: str, key_cols: list[str]):
         conn.execute(text(merge_sql))
         conn.execute(text(f"DROP TABLE IF EXISTS {tmp}"))
         log.info(f"Upserted {len(df)} rows into dw.{table}")
+
+if __name__ == "__main__":
+    from .transform import transform_to_dw_struct
+    from .extract import fetch_source_data
+
+    raw_data = fetch_source_data()
+    dw_struct = transform_to_dw_struct(raw_data)
+
+    for table_name, df in dw_struct.items():
+        key_cols = {"dim_user": ["user_id"],
+                    "dim_category": ["category_id"],
+                    "dim_sla": ["sla_id"],
+                    "fact_ticket": ["ticket_id"]}[table_name]
+        upsert_frame(df, table_name, key_cols)
+        

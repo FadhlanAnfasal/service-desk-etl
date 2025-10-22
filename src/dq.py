@@ -48,5 +48,5 @@ def check_threshold(table, prev_count, threshold_ratio=0.5):
     """
     current_count = len(table)
     if prev_count > 0 and current_count < prev_count * threshold_ratio:
-        return f"⚠ Row count drop detected: {prev_count} → {current_count} ({100 - (current_count/prev_count)*100:.1f}% drop)"
+        return f"Row count drop detected: {prev_count} → {current_count} ({100 - (current_count/prev_count)*100:.1f}% drop)"
     return None
