@@ -316,3 +316,13 @@ Traceback (most recent call last):
   File "/mnt/c/Users/ACER/Documents/service-desk-etl/src/extract.py", line 2, in <module>
     from tenacity import retry, stop_after_attempt, wait_exponential
 ModuleNotFoundError: No module named 'tenacity'
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/mnt/c/Users/ACER/Documents/service-desk-etl/src/main.py", line 1, in <module>
+    from .extract import fetch_source_data
+  File "/mnt/c/Users/ACER/Documents/service-desk-etl/src/extract.py", line 1, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'

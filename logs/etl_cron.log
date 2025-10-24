@@ -582,3 +582,121 @@ AttributeError: 'Connection' object has no attribute 'cursor'
 2025-10-22 14:57:01,706 | INFO | src.load | Upserted 1 rows into dw.dim_sla
 2025-10-22 14:57:01,854 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
 2025-10-22 14:57:01,923 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-24 08:52:13,258 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-24 08:52:13,796 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-24 08:52:14,167 | INFO | src.extract | Fetched 100 records
+2025-10-24 08:52:14,169 | INFO | __main__ | Fetched 100 raw records
+2025-10-24 08:52:14,208 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-24 08:52:14,215 | INFO | __main__ | DQ Checks: None
+2025-10-24 08:52:18,672 | ERROR | __main__ | ETL Failed
+Traceback (most recent call last):
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ACER\Documents\service-desk-etl\src\main.py", line 44, in run
+    upsert_frame(tables["dim_user"], "dim_user", ["user_id"])
+  File "C:\Users\ACER\Documents\service-desk-etl\src\load.py", line 14, in upsert_frame
+    with engine.begin() as conn:
+  File "C:\Users\ACER\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3241, in begin
+    with self.connect() as conn:
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3277, in connect
+    return self._connection_cls(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2440, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3301, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\sqlalchemy\engine\default.py", line 629, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\ACER\Documents\service-desk-etl\venv\lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-24 08:57:59,594 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-24 08:57:59,755 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-24 08:58:00,209 | INFO | src.extract | Fetched 100 records
+2025-10-24 08:58:00,214 | INFO | __main__ | Fetched 100 raw records
+2025-10-24 08:58:00,247 | INFO | src.transform | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-24 08:58:00,261 | INFO | __main__ | DQ Checks: None
+2025-10-24 08:58:00,562 | INFO | src.load | Upserted 10 rows into dw.dim_user
+2025-10-24 08:58:00,684 | INFO | src.load | Upserted 1 rows into dw.dim_category
+2025-10-24 08:58:00,808 | INFO | src.load | Upserted 1 rows into dw.dim_sla
+2025-10-24 08:58:01,015 | INFO | src.load | Upserted 100 rows into dw.fact_ticket
+2025-10-24 08:58:01,147 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-24 09:17:07,904 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-24 09:17:08,213 | INFO | src.extract | Fetched 100 records
+2025-10-24 09:17:08,236 | INFO | __main__ | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
+2025-10-24 09:17:26,768 | INFO | src.extract | Requesting source API: https://jsonplaceholder.typicode.com/posts
+2025-10-24 09:17:27,096 | INFO | src.extract | Fetched 100 records
+2025-10-24 09:17:27,153 | INFO | __main__ | dim_user=10, dim_category=1, dim_sla=1, fact_ticket=100
