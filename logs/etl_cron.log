@@ -1127,3 +1127,13 @@ ON CONFLICT (review_id) DO UPDATE SET username=EXCLUDED.username, rating=EXCLUDE
 2025-10-28 09:10:50,533 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
 2025-10-28 09:10:50,547 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
 2025-10-28 09:10:50,616 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-28 14:13:21,436 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-28 14:13:21,744 | INFO | src.extract | Requesting source API: https://mrtj-api-production.up.railway.app//
+2025-10-28 14:13:23,001 | INFO | src.extract | Fetched 987 records
+2025-10-28 14:13:23,021 | INFO | __main__ | Fetched 987 raw review records from MRTJ API
+2025-10-28 14:13:23,229 | INFO | src.transform | ✅ Cleaned 987 review records from MRTJ API
+2025-10-28 14:13:23,354 | INFO | __main__ | Transformed 987 cleaned review records
+2025-10-28 14:13:23,645 | INFO | __main__ | DQ Checks: None
+2025-10-28 14:13:24,591 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
+2025-10-28 14:13:24,668 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
+2025-10-28 14:13:24,823 | INFO | __main__ | ETL run complete with status=SUCCESS
