@@ -2,51 +2,54 @@ import pandas as pd
 
 def dq_checks(tables: dict[str, pd.DataFrame]) -> list[str]:
     issues = []
-    f = tables.get("fact_ticket", pd.DataFrame())
+
+    # Ambil tabel utama
+    f = tables.get("fact_reviews", pd.DataFrame())
 
     if not f.empty:
-        if f["ticket_id"].isna().any():
-            issues.append("Null ticket_id in fact_ticket")
-        if f["ticket_id"].duplicated().any():
-            issues.append("Duplicate ticket_id in fact_ticket")
+        # Cek review_id
+        if f["review_id"].isna().any():
+            issues.append("Ada review_id yang kosong di fact_reviews")
+        if f["review_id"].duplicated().any():
+            issues.append("Ada review_id duplikat di fact_reviews")
 
-        if "priority" in f.columns:
-            valid_priorities = ["low", "medium", "high"]
-            invalid_priorities = f[~f["priority"].isin(valid_priorities)]
-            if not invalid_priorities.empty:
-                issues.append("Invalid priority values found in fact_ticket")
+        # Cek rating (harus antara 1-5)
+        if "rating" in f.columns:
+            invalid_ratings = f[~f["rating"].between(1, 5)]
+            if not invalid_ratings.empty:
+                issues.append(f"Ada rating di luar rentang 1-5 ({len(invalid_ratings)} baris)")
 
-        if "status" in f.columns:
-            valid_statuses = ["open", "in_progress", "resolved", "closed"]
-            invalid_statuses = f[~f["status"].isin(valid_statuses)]
-            if not invalid_statuses.empty:
-                issues.append("Invalid status values found in fact_ticket")
+        # Cek sentiment (harus salah satu dari tiga)
+        if "sentiment" in f.columns:
+            valid_sentiments = ["positive", "neutral", "negative"]
+            invalid_sentiments = f[~f["sentiment"].isin(valid_sentiments)]
+            if not invalid_sentiments.empty:
+                issues.append(f"Ada sentiment tidak valid ({len(invalid_sentiments)} baris)")
 
-        if "resolution_time_min" in f.columns:
-            if (f["resolution_time_min"] < 0).any():
-                issues.append("Negative resolution time found in fact_ticket")
+        # Cek review_text kosong
+        if f["review_text"].isna().any() or (f["review_text"].str.strip() == "").any():
+            issues.append("Ada review_text kosong di fact_reviews")
 
-        if "is_sla_breached" in f.columns:
-            if f["is_sla_breached"].isna().any():
-                issues.append("NULL SLA breach flag detected")
-            elif f["is_sla_breached"].dtype != bool:
-                issues.append("Invalid SLA breach flag datatype (should be boolean)")
+        # Cek username kosong
+        if f["username"].isna().any():
+            issues.append("Ada username kosong di fact_reviews")
 
-    if "dim_user" not in tables or "user_id" not in tables["dim_user"].columns:
-        issues.append("dim_user missing user_id")
+        # Cek tanggal
+        if "date" in f.columns and f["date"].isna().any():
+            issues.append("Ada tanggal kosong di fact_reviews")
 
-    if "dim_category" not in tables or "category_id" not in tables["dim_category"].columns:
-        issues.append("dim_category missing category_id")
+    else:
+        issues.append("Tabel fact_reviews kosong atau tidak ditemukan")
 
-    if "dim_sla" not in tables or "sla_id" not in tables["dim_sla"].columns:
-        issues.append("dim_sla missing sla_id")
+    return issues
+
 
 def check_threshold(table, prev_count, threshold_ratio=0.5):
     """
-    Memeriksa apakah jumlah row saat ini turun drastis dibanding run sebelumnya.
-    threshold_ratio=0.5 artinya drop lebih dari 50% dianggap anomali.
+    Mengecek apakah jumlah data drop signifikan dibanding run sebelumnya.
     """
     current_count = len(table)
     if prev_count > 0 and current_count < prev_count * threshold_ratio:
-        return f"Row count drop detected: {prev_count} → {current_count} ({100 - (current_count/prev_count)*100:.1f}% drop)"
+        return (f"Jumlah data turun drastis dari {prev_count} → {current_count} "
+                f"({100 - (current_count / prev_count) * 100:.1f}% drop)")
     return None

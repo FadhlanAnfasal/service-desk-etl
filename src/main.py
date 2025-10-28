@@ -41,7 +41,7 @@ def run(tag=None):
         log.info(f"Transformed {len(df_reviews)} cleaned review records")
 
         # === 3. Data Quality Checks (optional) ===
-        dq_issues = dq_checks(df_reviews)
+        dq_issues = dq_checks({"fact_reviews":df_reviews})
         dq_issues_str = ", ".join(dq_issues) if dq_issues else "None"
         log.info(f"DQ Checks: {dq_issues_str}")
 

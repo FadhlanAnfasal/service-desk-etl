@@ -1087,3 +1087,43 @@ ON CONFLICT (review_id) DO UPDATE SET username=EXCLUDED.username, rating=EXCLUDE
 2025-10-28 08:42:26,496 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
 2025-10-28 08:42:26,506 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
 2025-10-28 08:42:26,739 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-28 08:54:59,387 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-28 08:55:00,131 | INFO | src.extract | Requesting source API: https://mrtj-api-production.up.railway.app//
+2025-10-28 08:55:01,134 | INFO | src.extract | Fetched 987 records
+2025-10-28 08:55:01,139 | INFO | __main__ | Fetched 987 raw review records from MRTJ API
+2025-10-28 08:55:01,175 | INFO | src.transform | ✅ Cleaned 987 review records from MRTJ API
+2025-10-28 08:55:01,181 | INFO | __main__ | Transformed 987 cleaned review records
+2025-10-28 08:55:01,186 | INFO | __main__ | DQ Checks: Tabel fact_reviews kosong atau tidak ditemukan
+2025-10-28 08:55:01,513 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
+2025-10-28 08:55:01,529 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
+2025-10-28 08:55:01,623 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-28 08:59:30,380 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-28 08:59:30,545 | INFO | src.extract | Requesting source API: https://mrtj-api-production.up.railway.app//
+2025-10-28 08:59:31,401 | INFO | src.extract | Fetched 987 records
+2025-10-28 08:59:31,406 | INFO | __main__ | Fetched 987 raw review records from MRTJ API
+2025-10-28 08:59:31,433 | INFO | src.transform | ✅ Cleaned 987 review records from MRTJ API
+2025-10-28 08:59:31,434 | INFO | __main__ | Transformed 987 cleaned review records
+2025-10-28 08:59:31,437 | INFO | __main__ | DQ Checks: Tabel fact_reviews kosong atau tidak ditemukan
+2025-10-28 08:59:31,924 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
+2025-10-28 08:59:31,941 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
+2025-10-28 08:59:32,018 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-28 09:03:14,581 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-28 09:03:14,943 | INFO | src.extract | Requesting source API: https://mrtj-api-production.up.railway.app//
+2025-10-28 09:03:15,783 | INFO | src.extract | Fetched 987 records
+2025-10-28 09:03:15,787 | INFO | __main__ | Fetched 987 raw review records from MRTJ API
+2025-10-28 09:03:15,805 | INFO | src.transform | ✅ Cleaned 987 review records from MRTJ API
+2025-10-28 09:03:15,807 | INFO | __main__ | Transformed 987 cleaned review records
+2025-10-28 09:03:15,830 | INFO | __main__ | DQ Checks: None
+2025-10-28 09:03:16,221 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
+2025-10-28 09:03:16,237 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
+2025-10-28 09:03:16,333 | INFO | __main__ | ETL run complete with status=SUCCESS
+2025-10-28 09:10:49,097 | INFO | __main__ | ===== Starting ETL Run (MANUAL) =====
+2025-10-28 09:10:49,406 | INFO | src.extract | Requesting source API: https://mrtj-api-production.up.railway.app//
+2025-10-28 09:10:50,130 | INFO | src.extract | Fetched 987 records
+2025-10-28 09:10:50,135 | INFO | __main__ | Fetched 987 raw review records from MRTJ API
+2025-10-28 09:10:50,152 | INFO | src.transform | ✅ Cleaned 987 review records from MRTJ API
+2025-10-28 09:10:50,160 | INFO | __main__ | Transformed 987 cleaned review records
+2025-10-28 09:10:50,170 | INFO | __main__ | DQ Checks: None
+2025-10-28 09:10:50,533 | INFO | src.load | ✅ Upserted 987 rows into dw.fact_reviews
+2025-10-28 09:10:50,547 | INFO | __main__ | ✅ Loaded 987 reviews into dw.fact_reviews
+2025-10-28 09:10:50,616 | INFO | __main__ | ETL run complete with status=SUCCESS

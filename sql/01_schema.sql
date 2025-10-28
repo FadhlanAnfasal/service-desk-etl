@@ -21,25 +21,22 @@ CREATE TABLE IF NOT EXISTS dw.etl_run_log (
 );
 
 
--- 1️⃣ Dimension: Sentiment
 CREATE TABLE IF NOT EXISTS dw.dim_sentiment (
     sentiment_id SERIAL PRIMARY KEY,
-    sentiment_name TEXT UNIQUE,     -- 'positive', 'neutral', 'negative'
-    sentiment_label TEXT,           -- 'Positif', 'Netral', 'Negatif'
-    sentiment_color TEXT,           -- untuk visualisasi (#4CAF50, #FFC107, #F44336)
+    sentiment_name TEXT UNIQUE,     
+    sentiment_label TEXT,           
+    sentiment_color TEXT,           
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- 2️⃣ Dimension: Rating
 CREATE TABLE IF NOT EXISTS dw.dim_rating (
     rating_id SERIAL PRIMARY KEY,
-    rating_value INT UNIQUE,        -- 1 sampai 5
-    rating_label TEXT,              -- 'Sangat Buruk', 'Buruk', 'Netral', 'Baik', 'Sangat Baik'
-    satisfaction_level TEXT,        -- 'low', 'medium', 'high'
+    rating_value INT UNIQUE,        
+    rating_label TEXT,              
+    satisfaction_level TEXT,        
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- 3️⃣ Update Fact Reviews agar ada foreign key
 ALTER TABLE IF EXISTS dw.fact_reviews
 ADD COLUMN IF NOT EXISTS sentiment_id INT REFERENCES dw.dim_sentiment(sentiment_id),
 ADD COLUMN IF NOT EXISTS rating_id INT REFERENCES dw.dim_rating(rating_id);
