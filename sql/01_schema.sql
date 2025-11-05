@@ -40,3 +40,12 @@ CREATE TABLE IF NOT EXISTS dw.dim_rating (
 ALTER TABLE IF EXISTS dw.fact_reviews
 ADD COLUMN IF NOT EXISTS sentiment_id INT REFERENCES dw.dim_sentiment(sentiment_id),
 ADD COLUMN IF NOT EXISTS rating_id INT REFERENCES dw.dim_rating(rating_id);
+
+ALTER TABLE dw.fact_reviews
+ADD COLUMN day_name TEXT,
+ADD COLUMN day_number INT;
+
+UPDATE dw.fact_reviews
+SET 
+    day_name = TRIM(TO_CHAR(date, 'Day')),
+    day_number = EXTRACT(ISODOW FROM date);
