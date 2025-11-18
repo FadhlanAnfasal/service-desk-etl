@@ -49,3 +49,38 @@ UPDATE dw.fact_reviews
 SET 
     day_name = TRIM(TO_CHAR(date, 'Day')),
     day_number = EXTRACT(ISODOW FROM date);
+
+INSERT INTO dw.dim_rating (rating_value, rating_label, satisfaction_level)
+VALUES
+    (1, 'Terrible', 'Sampah'),
+    (2, 'Poor', 'Kureng'),
+    (3, 'Average', 'Medioker'),
+    (4, 'Good', 'Cakep'),
+    (5, 'Excellent', 'Top Markotop')
+ON CONFLICT (rating_value) DO NOTHING;
+
+ALTER TABLE dw.fact_reviews
+ADD COLUMN rating_label TEXT;
+
+UPDATE dw.fact_reviews fr
+SET rating_label = dr.rating_label
+FROM dw.dim_rating dr
+WHERE fr.rating = dr.rating_value;
+
+INSERT INTO dw.dim_sentiment (sentiment_name, sentiment_label, sentiment_color)
+VALUES
+    ( 1, 'Negative', 'red'),
+    ( 2, 'Neutral', 'yellow'),
+    ( 3, 'Positive', 'green');
+
+SELECT
+    f.*,
+    d.sentiment_color
+FROM dw.fact_reviews f
+LEFT JOIN dw.dim_sentiment d
+    ON f.sentiment = d.sentiment_label;
+
+UPDATE fact_reviews f
+SET sentiment_color = d.sentiment_color
+FROM dim_sentiment d
+WHERE f.sentiment = d.sentiment_label;
