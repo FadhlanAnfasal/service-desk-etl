@@ -24,7 +24,7 @@ def run(tag=None):
     DB_USER = os.getenv("DB_USER", "etl_user")
     DB_PASS = os.getenv("DB_PASS", "etl_pass")
     DB_NAME = os.getenv("DB_NAME", "servicedesk_dw")
-    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_HOST = os.getenv("DB_HOST", "db")
     DB_PORT = os.getenv("DB_PORT", "5432")
 
     engine = create_engine(
