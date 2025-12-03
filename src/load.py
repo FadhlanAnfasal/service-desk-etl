@@ -55,7 +55,7 @@ if __name__ == "_main_":
     # Transformasi data ke bentuk DataFrame tunggal (reviews)
     dw_struct = transform_to_clean_data(raw_data)
 
-    # Asumsikan transform.py return dict seperti: {"fact_reviews": df_reviews}
+    # Asumsi transform.py return dict seperti: {"fact_reviews": df_reviews}
     for table_name, df in dw_struct.items():
         # Primary key-nya cukup review_id
         key_cols = ["review_id"]
