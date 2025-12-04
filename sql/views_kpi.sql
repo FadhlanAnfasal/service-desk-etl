@@ -28,24 +28,43 @@ ORDER BY dr.rating_value DESC;
 
 CREATE OR REPLACE VIEW dw.vw_day_distribution AS
 SELECT
-    fr.day_name,
+    TRIM(fr.day_name) AS day_name,
     fr.day_number,
-    COUNT(fr.review_id) AS total_reviews,
-    MODE() WITHIN GROUP (ORDER BY fr.rating_label) AS most_common_rating
+    COUNT(*) AS total_reviews,
+    MODE() WITHIN GROUP (ORDER BY dr.rating_label) AS most_common_rating
 FROM dw.fact_reviews fr
-GROUP BY fr.day_name, fr.day_number
+LEFT JOIN dw.dim_rating dr ON fr.rating = dr.rating_value
+WHERE fr.day_number BETWEEN 1 AND 7
+GROUP BY TRIM(fr.day_name), fr.day_number
 ORDER BY fr.day_number;
+
 
 CREATE OR REPLACE VIEW dw.vw_day_rating_distribution AS
 SELECT
-    fr.day_name,
+    TRIM(fr.day_name) AS day_name,
     fr.day_number,
-    SUM(CASE WHEN fr.rating_label = 'Excellent' THEN 1 ELSE 0 END) AS excellent,
-    SUM(CASE WHEN fr.rating_label = 'Good' THEN 1 ELSE 0 END) AS good,
-    SUM(CASE WHEN fr.rating_label = 'Average' THEN 1 ELSE 0 END) AS average,
-    SUM(CASE WHEN fr.rating_label = 'Poor' THEN 1 ELSE 0 END) AS poor,
-    SUM(CASE WHEN fr.rating_label = 'Terrible' THEN 1 ELSE 0 END) AS terrible,
+    SUM(CASE WHEN fr.rating = 5 THEN 1 END) AS excellent,
+    SUM(CASE WHEN fr.rating = 4 THEN 1 END) AS good,
+    SUM(CASE WHEN fr.rating = 3 THEN 1 END) AS average,
+    SUM(CASE WHEN fr.rating = 2 THEN 1 END) AS poor,
+    SUM(CASE WHEN fr.rating = 1 THEN 1 END) AS terrible,
     COUNT(*) AS total_reviews
 FROM dw.fact_reviews fr
-GROUP BY fr.day_name, fr.day_number
+WHERE fr.day_number BETWEEN 1 AND 7
+GROUP BY TRIM(fr.day_name), fr.day_number
 ORDER BY fr.day_number;
+
+
+CREATE OR REPLACE VIEW dw.vw_year_rating_distribution AS
+SELECT
+    EXTRACT(YEAR FROM fr.date) AS year,
+    COALESCE(SUM(CASE WHEN fr.rating = 5 THEN 1 END), 0) AS excellent,
+    COALESCE(SUM(CASE WHEN fr.rating = 4 THEN 1 END), 0) AS good,
+    COALESCE(SUM(CASE WHEN fr.rating = 3 THEN 1 END), 0) AS average,
+    COALESCE(SUM(CASE WHEN fr.rating = 2 THEN 1 END), 0) AS poor,
+    COALESCE(SUM(CASE WHEN fr.rating = 1 THEN 1 END), 0) AS terrible,
+    COUNT(*) AS total_reviews
+FROM dw.fact_reviews fr
+WHERE fr.date >= '2019-01-01'
+GROUP BY EXTRACT(YEAR FROM fr.date)
+ORDER BY year;
