@@ -90,3 +90,5 @@ Folder dari operasi ETL Pipeline akan diunggah ke github serta di cek kualitas k
 - git add .
 - git commit -m " "
 - git push origin main
+
+# Modul ini untuk developer yang ingin menggunakan ETL ini sebagai referensi
