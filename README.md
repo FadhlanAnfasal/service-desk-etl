@@ -38,27 +38,27 @@ Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/
 ### A. Localhost
 
 - logs
--- cron_etl.log
--- etl_cron.log
--- task_log.txt
+-- cron_etl.log;
+-- etl_cron.log;
+-- task_log.txt;
 - notebook
--- analytics.ipynb
--- exploration.ipynb
--- oscar_age_male.csv
+-- analytics.ipynb;
+-- exploration.ipynb;
+-- oscar_age_male.csv;
 - sql
--- 01_schema.sql
--- 02_indexes.sql (opsional)
--- views_kpi.sql
+-- 01_schema.sql;
+-- 02_indexes.sql (opsional);
+-- views_kpi.sql;
 - src
--- __init__.py
--- config.py
--- dq.py
--- extract.py
--- load.py
--- logger.py
--- main.py
--- test_etl_functions.py
--- transform.py
+-- __init__.py;
+-- config.py;
+-- dq.py;
+-- extract.py;
+-- load.py;
+-- logger.py;
+-- main.py;
+-- test_etl_functions.py;
+-- transform.py;
 - venv
 - .env
 - .gitignore
@@ -73,12 +73,12 @@ Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/
 - dags
 -- service_desk_etl_dag.py
 - logs
--- cron_etl.log  
--- 'dag_id=service_desk_etl'   
--- dag_processor_manager   
--- etl_cron.log   
--- scheduler   
--- task_log.txt
+-- cron_etl.log;
+-- 'dag_id=service_desk_etl';   
+-- dag_processor_manager;   
+-- etl_cron.log;   
+-- scheduler;   
+-- task_log.txt;
 - run_etl.bat
 - .env         
 - notebook         
@@ -87,16 +87,16 @@ Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/
 - README.md
 - docker-compose.yml          
 - src
--- __init__.py
--- config.py
--- extract.py  
--- logger.py
--- test_etl_functions.py
--- __pycache__  
--- dq.py
--- load.py
--- main.py
--- transform.py
+-- __init__.py;
+-- config.py;
+-- extract.py;  
+-- logger.py;
+-- test_etl_functions.py;
+-- __pycache__;
+-- dq.py;
+-- load.py;
+-- main.py;
+-- transform.py;
 - .github      
 - RUNBOOK.md                
 - etl_cron.log         
@@ -126,7 +126,7 @@ Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/
 
 ### C. Aplikasikan Data Warehouse Schema
 
-Agar lebih mudah, koneksikan postgresql ke dbeaver dan masukkan semua kode 01_schema.sql melalui dbeaver.
+Agar lebih mudah, koneksikan postgresql ke dbeaver dan masukkan semua kode '01_schema.sql' melalui dbeaver.
 
 ### D. Konfigurasi Virtual Environment
 
@@ -135,7 +135,7 @@ Gunakan '.\venv\Scripts\activate' di windows dan 'Source venv/bin/activate' di w
 
 ### E. Run ETL Secara Manual
 
-[python -m src.main]
+'python -m src.main'
 
 ## 7. Menjalankan ETL Otomatis dengan Cron dan Task Scheduler
 
@@ -145,7 +145,7 @@ Melalui 'crontab -e' dan atur waktu nya sesuai keinginan pengguna baik per menit
 
 ### B. Task Scheduler
 
-Hubungkan project ini ke task scheduler, atur waktu penggunaannya, gunakan run_etl.bat untuk mengintegrasikan project dengan task scheduler. Project akan berjalan setelah berhasil diintegrasikan.
+Hubungkan project ini ke task scheduler, atur waktu penggunaannya, gunakan 'run_etl.bat' untuk mengintegrasikan project dengan task scheduler. Project akan berjalan setelah berhasil diintegrasikan.
 
 ## 8. Diagram KPI
 
@@ -194,10 +194,10 @@ Integrasikan dengan 'postgresql+psycopg2://etl_user:etl_pass@localhost:5432/serv
 - 'ci.yml' untuk proses continuous integration di github.
 - Ambil ssh key dari github dan masukkan ke project agar terhubung tanpa harus login dengan username dan password.
 - Kode yang akan dijalankan sebagai berikut:
--- pre-commit run --all-files
--- git add .
--- git commit -m " "
--- git push 
+-- pre-commit run --all-files;
+-- git add .;
+-- git commit -m " ";
+-- git push;
 
 ### B. Git Bash
 
