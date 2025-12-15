@@ -17,13 +17,21 @@ Serta 1 data warehouse cron yang menampilkan status jalannya aplikasi tiap dijal
 
 Folder dari operasi ETL Pipeline akan diunggah ke github serta di cek kualitas kode nya.
 
-## 2. Architechture
+## 2. Flowchart
 
-Melalui link 
+Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/view?usp=sharing
 
 ## 3. Tech Stack
 
-Melalui link
+| Layer | Tools |
+|------|------|
+| Source | API |
+| ETL | Python (pandas, requests, SQLAlchemy, dotenv, tenacity) |
+| Database | PostgreSQL + Adminer |
+| Scheduling | Cron (Week 7), Airflow (Week 10) |
+| BI | Power BI, Jupyter Notebook|
+
+---
 
 ## 4. Project Repository
 
@@ -60,22 +68,61 @@ Melalui link
 
 ### B. DB WSL
 
-
-
+- .pre-commit-config.yaml
+- requirements.txt            
+- dags
+-- service_desk_etl_dag.py
+- logs
+-- cron_etl.log  
+-- 'dag_id=service_desk_etl'   
+-- dag_processor_manager   
+-- etl_cron.log   
+-- scheduler   
+-- task_log.txt
+- run_etl.bat
+- .env         
+- notebook         
+- sql
+- .git
+- README.md
+- docker-compose.yml          
+- src
+-- __init__.py
+-- config.py
+-- extract.py  
+-- logger.py
+-- test_etl_functions.py
+-- __pycache__  
+-- dq.py
+-- load.py
+-- main.py
+-- transform.py
+- .github      
+- RUNBOOK.md                
+- etl_cron.log         
+- pyproject.toml   
+- venv
+- .gitignore       
+- install_log.txt      
+- pytest.ini       
 
 ## 5. Airflow Structure
 
-
+- airflow.cfg  
+- airflow.db  
+- docker-compose-airflow.yml  
+- logs  
+- plugins
 
 ## 6. Setup Dan Bagaimana Cara Menjalankan ETL
 
 ### A. Install 'requirements.txt'
 
-- # pip freeze > requirements.txt
+- 'pip freeze > requirements.txt'
 
 ### B. Konfigurasi PostgreSQL dengan 'docker compose'
 
-- # docker compose up -d
+- 'docker compose up -d'
 
 ### C. Aplikasikan Data Warehouse Schema
 
@@ -88,7 +135,7 @@ Gunakan '.\venv\Scripts\activate' di windows dan 'Source venv/bin/activate' di w
 
 ### E. Run ETL Secara Manual
 
-# python -m src.main
+[python -m src.main]
 
 ## 7. Menjalankan ETL Otomatis dengan Cron dan Task Scheduler
 
@@ -114,13 +161,43 @@ Integrasikan dengan 'postgresql+psycopg2://etl_user:etl_pass@localhost:5432/serv
 
 ## 9. Airflow
 
-Unduh library airflow di wsl. Gunakan db sebagai host karena airflow tidakbisa digunakan di localhost.
+- Unduh library airflow di wsl. Gunakan db sebagai host karena airflow tidak bisa digunakan di localhost. 
+- Buat database airflow dengan kode 'airflow db init'.
+- Airflow hanya bisa digunakan di wsl.
+- Gunakan service_desk_etl_dag.py untuk mendata setiap langkah yang akan dilakukan oleh airflow serta urutannya.
+- Urutan dari proses melalui airflow yaitu menjalankan etl (run_etl) >> email smtp >> notifikasi group microsoft teams.
+- Atur airflow.cfg untuk mengaktifkan email smtp.
+- Pada 'airflow.cfg', masuk ke bagian [email] dan [smtp] untuk mengatur pengiriman notifikasi berhasil ke email user dari email smtp.
+- Akun yang digunakan user harus mendapatkan password dari google dan untuk mendapatkan password tersebut akun harus terautentikasi dua faktor.
+- Urutannya untuk mendaftarkan password yaitu Setelah autentikasi 2 faktor masuk ke App Password >> masukkan [App : Mail]; [Device : Other].
+- Password akan didapatkan setelah memasukkan data terkait di App Password dan password tersebut berisi 16 karakter dan tidak bisa dibuat manual.
+- Masukkan password tersebut pada bagian [smtp] di airflow.cfg.
+- Password yang didapatkan kurang lebih sebagai contoh 'xxxx xxxx xxxx xxxx' namun yang akan diisi di airflow.cfg tidak boleh diberi spasi seperti ini 'xxxxxxxxxxxxxxxx'.
+- Untuk microsoft teams harus menggunakan email kampus/kantor dan tidak bisa menggunakan email pribadi.
+- Buat webhook di teams dengan masuk ke channel teams dan buat incoming webhook. 
+- Beri nama sesuai yang user inginkan [etl_notifications] dan user akan mendapatkan url webhook.
+- Unduh workflows dan atur agar workflow alert terkirim ke channel yang telah dibuat.
+- Masukkan url ke 'service_desk_etl_dag.py' pada bagian [teams_notify], usahakan url dispasi menjadi beberapa bagian.
+- Atur workflow nya melalui power automate agar terkirim ke teams dengan membuat flowchart nya dan integrasikan notifikasi nya dengan flowchart nya.
+- Jangan lupa buat docker khusus airflow yang terdapat airflow scheduler dan airflow webserver.
+- Jalankan airflow melalui docker khusus airflow dan user akan mendapatkan notifikasi status etl yang telah dijalankan.
 
 ## 10. Input Folder ETL ke Github
 
 ### A. WSL
 
-
+- Install git library [pre commit, black, flake8].
+- 'pre_commit_config.yaml' untuk menjalankan semua commit ke github.
+- #noqa untuk menghindari pengecekan dari flake8.
+- 'test_etl_functions.py' untuk mengecek apakah masing masing kode dari etl berjalan dan diuji dengan 'pytest'.
+- 'pyproject.toml' untuk mengurutkan masing - masing library yang akan dijalankan.
+- 'ci.yml' untuk proses continuous integration di github.
+- Ambil ssh key dari github dan masukkan ke project agar terhubung tanpa harus login dengan username dan password.
+- Kode yang akan dijalankan sebagai berikut:
+-- pre-commit run --all-files
+-- git add .
+-- git commit -m " "
+-- git push 
 
 ### B. Git Bash
 
@@ -130,5 +207,6 @@ Unduh library airflow di wsl. Gunakan db sebagai host karena airflow tidakbisa d
 
 ## 11. Diagram db
 
+Kode dari 01_schema.sql dan views_kpi.sql yang diubah dari sql menjadi dbms lalu dihubungkan satu per satu.
 
 # Modul ini untuk developer yang ingin menggunakan ETL ini sebagai referensi
