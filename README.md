@@ -17,9 +17,9 @@ Serta 1 data warehouse cron yang menampilkan status jalannya aplikasi tiap dijal
 
 Folder dari operasi ETL Pipeline akan diunggah ke github serta di cek kualitas kode nya.
 
-## 2. Flowchart
+## 2. Architecture
 
-Melalui link  https://drive.google.com/file/d/1mjbLq0OJ3kYCUTJswf1yF5S1mOxwu5OH/view?usp=sharing
+Melalui link 
 
 ## 3. Tech Stack
 
@@ -210,3 +210,9 @@ Integrasikan dengan 'postgresql+psycopg2://etl_user:etl_pass@localhost:5432/serv
 Kode dari 01_schema.sql dan views_kpi.sql yang diubah dari sql menjadi dbms lalu dihubungkan satu per satu.
 
 # Modul ini untuk developer yang ingin menggunakan ETL ini sebagai referensi
+
+# Saran Update fitur selanjutnya
+
+- Penambahan etl scrapping data pada apache airflow supaya bisa ditampilkan langsung ke dashboard power bi
+- Penghapusan layer API node.js
+- Penggunaan etl sepenuhnya dalam apache airflow sehingga tidak menggunakan google colab secara manual
