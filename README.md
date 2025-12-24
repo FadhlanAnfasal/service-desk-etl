@@ -98,7 +98,7 @@ Melalui link
 -- main.py;
 -- transform.py;
 - .github      
-- RUNBOOK.md                
+- README.md                
 - etl_cron.log         
 - pyproject.toml   
 - venv
@@ -215,4 +215,4 @@ Kode dari 01_schema.sql dan views_kpi.sql yang diubah dari sql menjadi dbms lalu
 
 - Penambahan etl scrapping data pada apache airflow supaya bisa ditampilkan langsung ke dashboard power bi
 - Penghapusan layer API node.js
-- Penggunaan etl sepenuhnya dalam apache airflow sehingga tidak menggunakan google colab secara manual
+- Penggunaan etl sepenuhnya dalam environtment apache airflow sehingga tidak menggunakan google colab secara manual
